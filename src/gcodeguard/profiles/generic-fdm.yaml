@@ -1,0 +1,31 @@
+name: generic-fdm
+description: >
+  Conservative defaults for a typical bed-slinger FDM printer (220x220x250,
+  all-metal or PTFE hotend, PLA/PETG). Start here and override what differs.
+mode: enforce
+machine:
+  firmware: marlin
+  build_volume: {x: [0, 220], y: [0, 220], z: [0, 250]}
+  bounds_margin_mm: 2
+  max_hotend_temp: 260
+  max_bed_temp: 110
+  max_chamber_temp: 60
+  min_print_temp: 170
+  max_feedrate_mm_s: 300
+  max_accel_mm_s2: 10000
+  nozzle_diameter: 0.4
+  filament_diameter: 1.75
+  max_layer_height_mm: 0.32
+thermal:
+  heater_idle_timeout_s: 600
+  max_dwell_s: 300
+  max_temp_drop_c: 25
+actions:
+  info: allow
+  warning: warn
+  critical: block
+commands:
+  # Common slicer start/end macros. Add your own Klipper macros here.
+  allow: [PRINT_START, START_PRINT, PRINT_END, END_PRINT, M486, TIMELAPSE_TAKE_FRAME,
+          TIMELAPSE_RENDER, LOAD_FILAMENT, UNLOAD_FILAMENT, CLEAN_NOZZLE]
+  unknown: warn

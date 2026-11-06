@@ -1,0 +1,13 @@
+extends: generic-fdm
+name: ender3
+description: >
+  Creality Ender-3 / Ender-3 V2 with the stock PTFE-lined hotend. Stock Marlin
+  allows up to 275 C (HEATER_0_MAXTEMP), but PTFE starts degrading and releasing
+  toxic fumes around 240-250 C, so the policy cap is lower than the firmware cap.
+machine:
+  firmware: marlin
+  build_volume: {x: [0, 220], y: [0, 220], z: [0, 250]}
+  max_hotend_temp: 240
+  max_bed_temp: 100
+  max_feedrate_mm_s: 200
+  max_accel_mm_s2: 3000

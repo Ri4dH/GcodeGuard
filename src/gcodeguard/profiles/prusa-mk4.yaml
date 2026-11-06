@@ -1,0 +1,13 @@
+extends: generic-fdm
+name: prusa-mk4
+description: Original Prusa MK4 / MK4S (all-metal hotend, 250x210x220).
+machine:
+  firmware: marlin
+  build_volume: {x: [0, 250], y: [-4, 210], z: [0, 220]}
+  max_hotend_temp: 290
+  max_bed_temp: 120
+  max_feedrate_mm_s: 400
+  max_accel_mm_s2: 7000
+commands:
+  # PrusaSlicer start G-code uses these firmware-specific codes.
+  allow: [M555, M862.1, M862.3, M862.5, M862.6, M17, M201, M203, M204, M205]
