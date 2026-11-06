@@ -1,0 +1,19 @@
+name: agent-strict
+description: >
+  Overlay for commands that come from an AI agent or any other untrusted
+  controller. Combine it with a machine profile:
+    gcodeguard scan --profile ender3 --profile agent-strict file.gcode
+  An agent has no business re-calibrating the machine, writing firmware
+  settings, touching the SD card, running shell commands, or sending macros
+  nobody listed.
+rules:
+  firmware.calibration_tamper: {severity: critical}
+  firmware.sd_card: {severity: critical}
+  motion.limits_tamper: {severity: critical}
+  host.restart: {severity: critical}
+  sabotage.flow_override: {severity: critical}
+  sabotage.temperature_drop: {severity: critical}
+thermal:
+  max_dwell_s: 120
+commands:
+  unknown: block

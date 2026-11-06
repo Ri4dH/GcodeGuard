@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+  <title id="title">GcodeGuard</title>
+  <desc id="desc">G-code commands stream toward a 3D printer through a shield. Safe commands pass; a dangerous command (M104 S300) is stopped at the shield.</desc>
+  <style>
+    .bg { fill: #1a1a19; }
+    .title { font: 700 54px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: #f0efec; }
+    .tag { font: 400 20px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: #c3c2b7; }
+    .tok text { font: 600 17px ui-monospace, Menlo, Consolas, monospace; fill: #f0efec; }
+    .tok rect { fill: #2f2f2d; stroke: #4a4a46; stroke-width: 1; }
+    .lane { stroke: #383835; stroke-width: 2; stroke-dasharray: 6 8; }
+    .shield { fill: #3987e5; }
+    .shield-glow { fill: #3987e5; opacity: 0.18; animation: pulse 3s ease-in-out infinite; transform-origin: 640px 205px; }
+    .ok { animation: pass 6s linear infinite; }
+    .bad { animation: stop 6s linear infinite; }
+    .bad rect { animation: redden 6s linear infinite; }
+    .x { opacity: 0; animation: cross 6s linear infinite; }
+    .d1 { animation-delay: 0s; } .d2 { animation-delay: -1.5s; } .d3, .d3 rect { animation-delay: -4.5s; }
+    @keyframes pass { from { transform: translateX(-190px); } to { transform: translateX(1240px); } }
+    @keyframes stop {
+      0% { transform: translateX(-190px); opacity: 1; }
+      55% { transform: translateX(430px); opacity: 1; }
+      85% { transform: translateX(430px); opacity: 1; }
+      100% { transform: translateX(430px); opacity: 0; }
+    }
+    @keyframes redden { 0%, 54% { fill: #2f2f2d; stroke: #4a4a46; } 56%, 100% { fill: #8f2a2a; stroke: #e66767; } }
+    @keyframes cross { 0%, 55% { opacity: 0; } 58%, 85% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+    @media (prefers-reduced-motion: reduce) {
+      .ok, .bad, .bad rect, .x, .shield-glow { animation: none; }
+      .x { opacity: 1; }
+      .bad { transform: translateX(430px); }
+      .bad rect { fill: #8f2a2a; stroke: #e66767; }
+      .d1 { transform: translateX(120px); } .d2 { transform: translateX(780px); }
+    }
+  </style>
+  <rect class="bg" width="1200" height="300" rx="16"/>
+  <text class="title" x="60" y="92">GcodeGuard</text>
+  <text class="tag" x="62" y="128">A safety firewall for 3D printers: dangerous, sabotaged, or AI-injected G-code never reaches the machine.</text>
+
+  <line class="lane" x1="0" y1="205" x2="1200" y2="205"/>
+
+  <!-- tokens (clipped to the card) -->
+  <svg x="0" y="0" width="1200" height="300">
+    <g class="tok ok d1"><rect x="0" y="186" width="150" height="38" rx="8"/><text x="18" y="211">G1 X42 Y18</text></g>
+    <g class="tok ok d2"><rect x="0" y="186" width="150" height="38" rx="8"/><text x="22" y="211">M104 S210</text></g>
+    <g class="tok bad d3"><rect x="0" y="186" width="150" height="38" rx="8"/><text x="22" y="211">M104 S300</text></g>
+  </svg>
+
+  <!-- shield -->
+  <circle class="shield-glow" cx="640" cy="205" r="52"/>
+  <path class="shield" d="M640 160 L676 174 L676 206 C676 230 660 246 640 254 C620 246 604 230 604 206 L604 174 Z"/>
+  <path d="M624 206 L636 218 L658 194" fill="none" stroke="#1a1a19" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <g class="x d3"><circle cx="588" cy="182" r="13" fill="#d03b3b"/><path d="M582 176 L594 188 M594 176 L582 188" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>
+
+  <!-- printer -->
+  <g transform="translate(1040 150)" fill="none" stroke="#c3c2b7" stroke-width="3" stroke-linejoin="round">
+    <rect x="0" y="0" width="110" height="110" rx="8"/>
+    <line x1="10" y1="28" x2="100" y2="28"/>
+    <path d="M48 28 L48 46 L55 56 L62 46 L62 28" fill="#c3c2b7"/>
+    <rect x="22" y="84" width="66" height="10" rx="2" fill="#3987e5" stroke="none"/>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "printer": {
+      "command": "gcodeguard",
+      "args": [
+        "mcp",
+        "--backend", "octoprint",
+        "--url", "http://octopi.local",
+        "--profile", "ender3",
+        "--strict",
+        "--audit", "/Users/you/gcodeguard-audit.jsonl"
+      ],
+      "env": { "GCODEGUARD_PRINTER_API_KEY": "paste-your-octoprint-api-key-here" }
+    }
+  }
+}

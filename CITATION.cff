@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use GcodeGuard or its benchmark in research, please cite it."
+title: "GcodeGuard: a safety firewall for AI-controlled fabrication devices"
+type: software
+authors:
+  - name: "Riad-H"
+repository-code: "https://github.com/Ri4dH/PrintGuard"
+license: MIT
+version: 0.1.0
+date-released: 2026-11-06
+keywords:
+  - 3D printing
+  - G-code
+  - cyber-physical security
+  - prompt injection
+  - LLM agents
+  - additive manufacturing security

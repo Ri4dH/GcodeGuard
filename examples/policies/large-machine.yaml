@@ -1,0 +1,11 @@
+# A deliberately permissive machine envelope, used to evaluate false positives on
+# real slicer output from many different printers (scripts/realworld_fp.py).
+# For your own printer, start from the closest built-in profile instead.
+extends: generic-fdm
+name: large-machine
+machine:
+  build_volume: {x: [-10, 400], y: [-10, 400], z: [0, 400]}
+  max_hotend_temp: 300
+  max_bed_temp: 120
+  max_feedrate_mm_s: 800
+  max_accel_mm_s2: 30000

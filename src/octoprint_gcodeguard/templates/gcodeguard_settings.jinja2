@@ -1,0 +1,54 @@
+<h3>GcodeGuard {{ plugin_gcodeguard_version }}</h3>
+<p>Every command OctoPrint sends to the printer is checked first. Blocked commands never reach the printer.</p>
+<form class="form-horizontal" onsubmit="return false;">
+  <div class="control-group">
+    <label class="control-label">Machine profile</label>
+    <div class="controls">
+      <select data-bind="value: settings.plugins.gcodeguard.profile">
+        {% for p in plugin_gcodeguard_profiles %}{% if p != "agent-strict" %}<option value="{{ p }}">{{ p }}</option>{% endif %}{% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Custom policy file</label>
+    <div class="controls">
+      <input type="text" class="input-xlarge" placeholder="/home/pi/gcodeguard.yaml" data-bind="value: settings.plugins.gcodeguard.policy_file">
+      <span class="help-block">Optional YAML applied on top of the profile.</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <label class="checkbox"><input type="checkbox" data-bind="checked: settings.plugins.gcodeguard.strict"> Strict mode (recommended when an AI agent or other untrusted software controls this printer)</label>
+      <label class="checkbox"><input type="checkbox" data-bind="checked: settings.plugins.gcodeguard.scan_uploads"> Scan uploaded files</label>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Mode</label>
+    <div class="controls">
+      <select data-bind="value: settings.plugins.gcodeguard.mode">
+        <option value="enforce">Enforce (block)</option>
+        <option value="monitor">Monitor (log only)</option>
+      </select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">When a command is blocked mid-print</label>
+    <div class="controls">
+      <select data-bind="value: settings.plugins.gcodeguard.on_block">
+        <option value="pause">Pause the print</option>
+        <option value="cancel">Cancel the print</option>
+        <option value="continue">Drop the command and continue</option>
+      </select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Idle-heater watchdog</label>
+    <div class="controls">
+      <div class="input-append">
+        <input type="number" min="0" class="input-mini" data-bind="value: settings.plugins.gcodeguard.watchdog_minutes">
+        <span class="add-on">min</span>
+      </div>
+      <span class="help-block">Switch heaters off after this long with nothing happening (0 disables).</span>
+    </div>
+  </div>
+</form>
