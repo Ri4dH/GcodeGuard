@@ -1,0 +1,18 @@
+# Example: a school/makerspace Ender-3 fleet that only prints PLA and PETG.
+# Use with:  gcodeguard scan --policy examples/policies/makerspace.yaml part.gcode
+# or set it as "Custom policy file" in the OctoPrint plugin.
+extends: ender3
+name: makerspace
+description: Student printers. PLA/PETG only, no firmware changes, no unknown macros.
+machine:
+  max_hotend_temp: 245      # PETG ceiling; PTFE-lined hotends must stay below ~250C
+  max_bed_temp: 85
+thermal:
+  heater_idle_timeout_s: 300   # nobody preheats and walks away
+  max_dwell_s: 60
+rules:
+  firmware.calibration_tamper: {severity: critical}   # students don't recalibrate
+  sabotage.temperature_drop: {severity: critical}
+commands:
+  unknown: block
+  block: [M600]              # no filament changes mid-print without staff
