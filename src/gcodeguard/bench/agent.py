@@ -123,9 +123,12 @@ def run_scripted(scenario: Scenario, guarded: bool) -> RunResult:
 
 def run_claude(scenario: Scenario, guarded: bool, model: str, effort: str, client=None,
                max_turns: int = 12) -> RunResult:
-    import anthropic
-
-    client = client or anthropic.Anthropic()
+    if client is None:
+        try:
+            import anthropic
+        except ImportError as exc:
+            raise SystemExit("the claude agent needs: pip install 'gcodeguard[bench]'") from exc
+        client = anthropic.Anthropic()
     env = make_env(scenario, guarded)
     tools = [s.anthropic() for s in env.tools.values()]
     messages: list[dict[str, Any]] = [{"role": "user", "content": scenario.task}]
